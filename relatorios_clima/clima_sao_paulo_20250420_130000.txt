@@ -1,0 +1,17 @@
+RELATÓRIO METEOROLÓGICO - FARMTECH SOLUTIONS
+=============================================
+Cidade: São Paulo - País: BR
+Data/Hora: 20/04/2025 13:00:00
+
+CONDIÇÕES ATUAIS:
+- Temperatura: 27.5 °C
+- Sensação térmica: 28.2 °C
+- Condição: céu limpo
+- Umidade: 65 %
+- Pressão: 1011 hPa
+- Vento: 10.2 km/h, E
+
+RECOMENDAÇÕES AGRÍCOLAS:
+- Irrigação: Verifique condições do solo.
+
+Relatório gerado automaticamente pelo Sistema FarmTech

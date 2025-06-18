@@ -1,0 +1,77 @@
+===========================================================
+         RELATÓRIO INTEGRADO FARMTECH SOLUTIONS
+===========================================================
+
+Data/Hora do relatório: 20/04/2025 13:01:05
+
+INFORMAÇÕES METEOROLÓGICAS
+-----------------------------------------------------------
+Cidade: São Paulo - País: BR
+Dados atualizados em: 20/04/2025 13:00:00
+
+Temperatura: 27.5 °C
+Umidade: 65 %
+Condição: céu limpo
+Vento: 10.2 km/h, E
+
+DADOS AGRÍCOLAS
+-----------------------------------------------------------
+Total de culturas: 5
+Área total cultivada: 1200 hectares
+
+Cultura      Área (ha)    Linhas    Produto      Dosagem      Total
+----------------------------------------------------------------------
+Soja         100.00       2         fertilizante 500.00       100000.00
+Café         400.00       4         fosfato      500.00       800000.00
+Milho        250.00       3         nitrogênio   400.00       300000.00
+Feijão       150.00       2         potássio     300.00       90000.00
+Algodão      300.00       3         ureia        450.00       405000.00
+
+RECOMENDAÇÕES POR CULTURA
+-----------------------------------------------------------
+
+Cultura: Soja
+Área: 100 hectares
+Produto: fertilizante
+Recomendações:
+- Irrigação: Irrigação imediata recomendada. Condições secas podem afetar o desenvolvimento.
+- Aplicação: Em condições secas, aplicar fertilizante mais próximo às raízes
+- Colheita: Condições favoráveis para colheita
+- ALERTA: Temperatura acima de 25°C, monitorar necessidade hídrica
+
+Cultura: Café
+Área: 400 hectares
+Produto: fosfato
+Recomendações:
+- Irrigação: Irrigação recomendada. Café requer umidade consistente.
+- Aplicação: Condições adequadas para aplicação de produtos
+- Colheita: Condições favoráveis para colheita
+
+Cultura: Milho
+Área: 250 hectares
+Produto: nitrogênio
+Recomendações:
+- Irrigação: Irrigação urgente. Milho em condições muito secas.
+- Aplicação: Aplicar nitrogênio preferencialmente em solo úmido
+- Colheita: Condições favoráveis para colheita
+
+Cultura: Feijão
+Área: 150 hectares
+Produto: potássio
+Recomendações:
+- Irrigação: Verificar umidade do solo para determinar necessidade de irrigação
+- Aplicação: Condições adequadas para aplicação de produtos
+- Colheita: Condições favoráveis para colheita
+- ALERTA: Temperatura alta pode afetar floração do feijão
+
+Cultura: Algodão
+Área: 300 hectares
+Produto: ureia
+Recomendações:
+- Irrigação: Verificar umidade do solo para determinar necessidade de irrigação
+- Aplicação: Condições adequadas para aplicação de produtos
+- Colheita: Condições favoráveis para colheita
+
+-----------------------------------------------------------
+Relatório gerado automaticamente pelo Sistema FarmTech
+Para informações mais detalhadas, consulte a plataforma completa

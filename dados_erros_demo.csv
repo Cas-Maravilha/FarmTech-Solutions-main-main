@@ -1,0 +1,7 @@
+nome,area,linhas,produto,dosagem_por_metro,total_produto
+Soja,100.0,2,fertilizante,500.0,80000.0
+Café,-400.0,4,fosfato,500.0,800000.0
+Milho,250.0,3,nitrogênio,400.0,300000.0
+Feijão,150.0,2,potássio,300.0,90000.0
+Algodão,300.0,3,ureia,450.0,405000.0
+Soja,100.0,2,fertilizante,500.0,100000.0

@@ -1,0 +1,173 @@
+# FarmTech Solutions - Configuração de Ambiente
+# Copie este arquivo para .env e configure suas variáveis
+
+# =============================================================================
+# CONFIGURAÇÕES DE BANCO DE DADOS
+# =============================================================================
+
+# Tipo de banco de dados (sqlite ou mysql)
+DATABASE_TYPE=sqlite
+
+# Para SQLite
+DATABASE_URL=data/farmtech.db
+
+# Para MySQL
+DATABASE_HOST=localhost
+DATABASE_PORT=3306
+DATABASE_NAME=farmtech
+DATABASE_USER=root
+DATABASE_PASSWORD=
+
+# =============================================================================
+# CONFIGURAÇÕES DA API
+# =============================================================================
+
+# Host e porta da API
+API_HOST=0.0.0.0
+API_PORT=5000
+
+# Modo debug (True/False)
+API_DEBUG=True
+
+# Chave secreta para sessões
+API_SECRET_KEY=dev-secret-key-change-in-production
+
+# =============================================================================
+# CONFIGURAÇÕES DE MACHINE LEARNING
+# =============================================================================
+
+# Caminho para modelos treinados
+ML_MODEL_PATH=models/
+
+# Threshold para predições (0.0 a 1.0)
+ML_PREDICTION_THRESHOLD=0.7
+
+# Intervalo de retreinamento em horas
+ML_RETRAIN_INTERVAL=24
+
+# =============================================================================
+# CONFIGURAÇÕES DE NOTIFICAÇÕES - EMAIL
+# =============================================================================
+
+# Habilitar notificações por email
+EMAIL_ENABLED=False
+
+# Servidor SMTP
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+
+# Credenciais (use app password para Gmail)
+EMAIL_USER=seu-email@gmail.com
+EMAIL_PASSWORD=sua-senha-de-app
+
+# Lista de emails para notificações (separados por vírgula)
+EMAIL_TO_EMAILS=admin@fazenda.com,gerente@fazenda.com
+
+# =============================================================================
+# CONFIGURAÇÕES DE NOTIFICAÇÕES - SMS
+# =============================================================================
+
+# Habilitar notificações por SMS
+SMS_ENABLED=False
+
+# Provedor SMS (twilio)
+SMS_PROVIDER=twilio
+
+# Credenciais Twilio
+SMS_ACCOUNT_SID=seu-account-sid
+SMS_AUTH_TOKEN=seu-auth-token
+
+# Número de origem (formato: +5511999999999)
+SMS_FROM_NUMBER=+5511999999999
+
+# Lista de números para notificações (separados por vírgula)
+SMS_TO_NUMBERS=+5511999999999,+5511888888888
+
+# =============================================================================
+# CONFIGURAÇÕES DE ALERTAS
+# =============================================================================
+
+# Thresholds para alertas de umidade (%)
+ALERT_UMIDADE_MIN=30.0
+ALERT_UMIDADE_MAX=80.0
+
+# Thresholds para alertas de pH
+ALERT_PH_MIN=5.5
+ALERT_PH_MAX=7.5
+
+# Threshold para alertas de nutrientes (ppm)
+ALERT_NUTRIENTES_MIN=100.0
+
+# =============================================================================
+# CONFIGURAÇÕES DE LOGGING
+# =============================================================================
+
+# Nível de log (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+LOG_LEVEL=INFO
+
+# Arquivo de log
+LOG_FILE=logs/farmtech.log
+
+# Tamanho máximo do arquivo de log (bytes)
+LOG_MAX_SIZE=10485760
+
+# Número de backups de log
+LOG_BACKUP_COUNT=5
+
+# =============================================================================
+# CONFIGURAÇÕES DE CACHE
+# =============================================================================
+
+# Habilitar cache
+CACHE_ENABLED=False
+
+# Tipo de cache (redis, memory)
+CACHE_TYPE=redis
+
+# URL do Redis
+CACHE_URL=redis://localhost:6379/0
+
+# Tempo de vida do cache em segundos
+CACHE_TTL=3600
+
+# =============================================================================
+# CONFIGURAÇÕES DE SEGURANÇA
+# =============================================================================
+
+# Origens permitidas para CORS (separadas por vírgula)
+CORS_ORIGINS=*
+
+# Habilitar rate limiting
+RATE_LIMIT_ENABLED=True
+
+# Número máximo de requisições por janela
+RATE_LIMIT_REQUESTS=100
+
+# Janela de tempo para rate limiting em segundos
+RATE_LIMIT_WINDOW=60
+
+# =============================================================================
+# CONFIGURAÇÕES DE INTEGRAÇÃO
+# =============================================================================
+
+# Chave da API de clima (OpenWeatherMap)
+WEATHER_API_KEY=sua-chave-api-clima
+
+# Chave da API de mercado (se aplicável)
+MARKET_API_KEY=sua-chave-api-mercado
+
+# =============================================================================
+# CONFIGURAÇÕES DE BACKUP
+# =============================================================================
+
+# Habilitar backup automático
+BACKUP_ENABLED=True
+
+# Frequência de backup em horas
+BACKUP_INTERVAL=24
+
+# Caminho para armazenar backups
+BACKUP_PATH=backups/
+
+# Retenção de backups em dias
+BACKUP_RETENTION_DAYS=30 

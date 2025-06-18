@@ -1,0 +1,624 @@
+==========================================
+    FARM TECH SOLUTIONS - SERIAL PLOTTER
+==========================================
+Sistema de Monitoramento Agrícola
+ESP32 com Visualização em Tempo Real
+==========================================
+
+=== CONFIGURAÇÃO DO SERIAL PLOTTER ===
+Formato dos dados:
+Tempo,Temperatura,Umidade_Ar,Umidade_Solo,Setpoint,Erro,Irrigacao,Status
+Unidades: s,°C,%,%,%,%,0/1,0-4
+
+Legenda dos Status:
+0 = OK (Sistema Normal)
+1 = ALERTA: Temperatura Alta
+2 = ALERTA: Temperatura Baixa
+3 = ALERTA: Solo Seco
+4 = ALERTA: Solo Muito Úmido
+
+=== INÍCIO DOS DADOS ===
+Tempo,Temp,Umid_Ar,Umid_Solo,Setpoint,Erro,Irrigacao,Status
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.67°C
+💨 Umidade do Ar: 68.45%
+🌱 Umidade do Solo: 45% (Raw: 2250)
+🎯 Setpoint: 50.0%
+📊 Erro: 5.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 5.00
+📈 Proporcional: 2.50
+📉 Integral: 0.25
+📊 Derivativo: 0.05
+🎯 Saída PID: 2.80
+💧 Irrigação: INATIVA
+=========================
+
+120,25.67,68.45,45,50.0,5.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.68°C
+💨 Umidade do Ar: 68.42%
+🌱 Umidade do Solo: 46% (Raw: 2200)
+🎯 Setpoint: 50.0%
+📊 Erro: 4.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 4.00
+📈 Proporcional: 2.00
+📉 Integral: 0.45
+📊 Derivativo: -0.05
+🎯 Saída PID: 2.40
+💧 Irrigação: INATIVA
+=========================
+
+121,25.68,68.42,46,50.0,4.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.70°C
+💨 Umidade do Ar: 68.40%
+🌱 Umidade do Solo: 47% (Raw: 2150)
+🎯 Setpoint: 50.0%
+📊 Erro: 3.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 3.00
+📈 Proporcional: 1.50
+📉 Integral: 0.60
+📊 Derivativo: -0.05
+🎯 Saída PID: 2.05
+💧 Irrigação: INATIVA
+=========================
+
+122,25.70,68.40,47,50.0,3.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.72°C
+💨 Umidade do Ar: 68.38%
+🌱 Umidade do Solo: 48% (Raw: 2100)
+🎯 Setpoint: 50.0%
+📊 Erro: 2.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 2.00
+📈 Proporcional: 1.00
+📉 Integral: 0.70
+📊 Derivativo: -0.05
+🎯 Saída PID: 1.65
+💧 Irrigação: INATIVA
+=========================
+
+123,25.72,68.38,48,50.0,2.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.75°C
+💨 Umidade do Ar: 68.35%
+🌱 Umidade do Solo: 49% (Raw: 2050)
+🎯 Setpoint: 50.0%
+📊 Erro: 1.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 1.00
+📈 Proporcional: 0.50
+📉 Integral: 0.75
+📊 Derivativo: -0.05
+🎯 Saída PID: 1.20
+💧 Irrigação: INATIVA
+=========================
+
+124,25.75,68.35,49,50.0,1.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.78°C
+💨 Umidade do Ar: 68.32%
+🌱 Umidade do Solo: 50% (Raw: 2000)
+🎯 Setpoint: 50.0%
+📊 Erro: 0.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 0.00
+📈 Proporcional: 0.00
+📉 Integral: 0.75
+📊 Derivativo: -0.05
+🎯 Saída PID: 0.70
+💧 Irrigação: INATIVA
+=========================
+
+125,25.78,68.32,50,50.0,0.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.80°C
+💨 Umidade do Ar: 68.30%
+🌱 Umidade do Solo: 51% (Raw: 1950)
+🎯 Setpoint: 50.0%
+📊 Erro: -1.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -1.00
+📈 Proporcional: -0.50
+📉 Integral: 0.70
+📊 Derivativo: -0.05
+🎯 Saída PID: 0.15
+💧 Irrigação: INATIVA
+=========================
+
+126,25.80,68.30,51,50.0,-1.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.82°C
+💨 Umidade do Ar: 68.28%
+🌱 Umidade do Solo: 52% (Raw: 1900)
+🎯 Setpoint: 50.0%
+📊 Erro: -2.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -2.00
+📈 Proporcional: -1.00
+📉 Integral: 0.65
+📊 Derivativo: -0.05
+🎯 Saída PID: -0.40
+💧 Irrigação: INATIVA
+=========================
+
+127,25.82,68.28,52,50.0,-2.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.85°C
+💨 Umidade do Ar: 68.25%
+🌱 Umidade do Solo: 53% (Raw: 1850)
+🎯 Setpoint: 50.0%
+📊 Erro: -3.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -3.00
+📈 Proporcional: -1.50
+📉 Integral: 0.60
+📊 Derivativo: -0.05
+🎯 Saída PID: -0.95
+💧 Irrigação: INATIVA
+=========================
+
+128,25.85,68.25,53,50.0,-3.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.88°C
+💨 Umidade do Ar: 68.22%
+🌱 Umidade do Solo: 54% (Raw: 1800)
+🎯 Setpoint: 50.0%
+📊 Erro: -4.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -4.00
+📈 Proporcional: -2.00
+📉 Integral: 0.55
+📊 Derivativo: -0.05
+🎯 Saída PID: -1.50
+💧 Irrigação: INATIVA
+=========================
+
+129,25.88,68.22,54,50.0,-4.0,0,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.90°C
+💨 Umidade do Ar: 68.20%
+🌱 Umidade do Solo: 55% (Raw: 1750)
+🎯 Setpoint: 50.0%
+📊 Erro: -5.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -5.00
+📈 Proporcional: -2.50
+📉 Integral: 0.50
+📊 Derivativo: -0.05
+🎯 Saída PID: -2.05
+💧 Irrigação: INATIVA
+=========================
+
+130,25.90,68.20,55,50.0,-5.0,0,0
+
+> SETPOINT:65.0
+✅ Setpoint alterado para: 65.0%
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.92°C
+💨 Umidade do Ar: 68.18%
+🌱 Umidade do Solo: 56% (Raw: 1700)
+🎯 Setpoint: 65.0%
+📊 Erro: 9.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 9.00
+📈 Proporcional: 4.50
+📉 Integral: 0.95
+📊 Derivativo: 0.20
+🎯 Saída PID: 5.65
+💧 Irrigação: ATIVA
+=========================
+
+💧 IRRIGAÇÃO ATIVADA (PID)
+
+131,25.92,68.18,56,65.0,9.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.95°C
+💨 Umidade do Ar: 68.15%
+🌱 Umidade do Solo: 58% (Raw: 1650)
+🎯 Setpoint: 65.0%
+📊 Erro: 7.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 7.00
+📈 Proporcional: 3.50
+📉 Integral: 1.20
+📊 Derivativo: -0.10
+🎯 Saída PID: 4.60
+💧 Irrigação: ATIVA
+=========================
+
+132,25.95,68.15,58,65.0,7.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 25.98°C
+💨 Umidade do Ar: 68.12%
+🌱 Umidade do Solo: 60% (Raw: 1600)
+🎯 Setpoint: 65.0%
+📊 Erro: 5.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 5.00
+📈 Proporcional: 2.50
+📉 Integral: 1.45
+📊 Derivativo: -0.10
+🎯 Saída PID: 3.85
+💧 Irrigação: ATIVA
+=========================
+
+133,25.98,68.12,60,65.0,5.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.00°C
+💨 Umidade do Ar: 68.10%
+🌱 Umidade do Solo: 62% (Raw: 1550)
+🎯 Setpoint: 65.0%
+📊 Erro: 3.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 3.00
+📈 Proporcional: 1.50
+📉 Integral: 1.60
+📊 Derivativo: -0.10
+🎯 Saída PID: 3.00
+💧 Irrigação: ATIVA
+=========================
+
+134,26.00,68.10,62,65.0,3.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.02°C
+💨 Umidade do Ar: 68.08%
+🌱 Umidade do Solo: 64% (Raw: 1500)
+🎯 Setpoint: 65.0%
+📊 Erro: 1.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 1.00
+📈 Proporcional: 0.50
+📉 Integral: 1.65
+📊 Derivativo: -0.10
+🎯 Saída PID: 2.05
+💧 Irrigação: ATIVA
+=========================
+
+135,26.02,68.08,64,65.0,1.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.05°C
+💨 Umidade do Ar: 68.05%
+🌱 Umidade do Solo: 65% (Raw: 1450)
+🎯 Setpoint: 65.0%
+📊 Erro: 0.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: 0.00
+📈 Proporcional: 0.00
+📉 Integral: 1.65
+📊 Derivativo: -0.05
+🎯 Saída PID: 1.60
+💧 Irrigação: ATIVA
+=========================
+
+136,26.05,68.05,65,65.0,0.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.08°C
+💨 Umidade do Ar: 68.02%
+🌱 Umidade do Solo: 66% (Raw: 1400)
+🎯 Setpoint: 65.0%
+📊 Erro: -1.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -1.00
+📈 Proporcional: -0.50
+📉 Integral: 1.60
+📊 Derivativo: -0.05
+🎯 Saída PID: 1.05
+💧 Irrigação: ATIVA
+=========================
+
+137,26.08,68.02,66,65.0,-1.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.10°C
+💨 Umidade do Ar: 68.00%
+🌱 Umidade do Solo: 67% (Raw: 1350)
+🎯 Setpoint: 65.0%
+📊 Erro: -2.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -2.00
+📈 Proporcional: -1.00
+📉 Integral: 1.55
+📊 Derivativo: -0.05
+🎯 Saída PID: 0.50
+💧 Irrigação: ATIVA
+=========================
+
+138,26.10,68.00,67,65.0,-2.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.12°C
+💨 Umidade do Ar: 67.98%
+🌱 Umidade do Solo: 68% (Raw: 1300)
+🎯 Setpoint: 65.0%
+📊 Erro: -3.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -3.00
+📈 Proporcional: -1.50
+📉 Integral: 1.50
+📊 Derivativo: -0.05
+🎯 Saída PID: -0.05
+💧 Irrigação: ATIVA
+=========================
+
+139,26.12,67.98,68,65.0,-3.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.15°C
+💨 Umidade do Ar: 67.95%
+🌱 Umidade do Solo: 69% (Raw: 1250)
+🎯 Setpoint: 65.0%
+📊 Erro: -4.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -4.00
+📈 Proporcional: -2.00
+📉 Integral: 1.45
+📊 Derivativo: -0.05
+🎯 Saída PID: -0.60
+💧 Irrigação: ATIVA
+=========================
+
+140,26.15,67.95,69,65.0,-4.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.18°C
+💨 Umidade do Ar: 67.92%
+🌱 Umidade do Solo: 70% (Raw: 1200)
+🎯 Setpoint: 65.0%
+📊 Erro: -5.0%
+💧 Irrigação: ATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -5.00
+📈 Proporcional: -2.50
+📉 Integral: 1.40
+📊 Derivativo: -0.05
+🎯 Saída PID: -1.15
+💧 Irrigação: ATIVA
+=========================
+
+141,26.18,67.92,70,65.0,-5.0,1,0
+
+🔍 === LEITURA DOS SENSORES ===
+🌡️  Temperatura: 26.20°C
+💨 Umidade do Ar: 67.90%
+🌱 Umidade do Solo: 71% (Raw: 1150)
+🎯 Setpoint: 65.0%
+📊 Erro: -6.0%
+💧 Irrigação: INATIVA
+=====================================
+
+🔍 === ANÁLISE DE DADOS ===
+✅ Condições normais
+📋 Status Final: OK
+===============================
+
+🎛️  === CONTROLE PID ===
+📊 Erro: -6.00
+📈 Proporcional: -3.00
+📉 Integral: 1.35
+📊 Derivativo: -0.05
+🎯 Saída PID: -1.70
+💧 Irrigação: INATIVA
+=========================
+
+💧 IRRIGAÇÃO DESATIVADA (PID)
+
+142,26.20,67.90,71,65.0,-6.0,0,0
+
+> STATUS
+📊 === STATUS ATUAL DO SISTEMA ===
+🌡️  Temperatura: 26.20°C
+💨 Umidade do Ar: 67.90%
+🌱 Umidade do Solo: 71%
+🎯 Setpoint: 65.0%
+📊 Erro: -6.0%
+💧 Irrigação: INATIVA
+📋 Status: OK
+⏱️  Uptime: 142 segundos
+=====================================
+
+> STATS
+📈 === ESTATÍSTICAS DO SISTEMA ===
+⏱️  Tempo de funcionamento: 142 segundos
+📊 Total de leituras: 28
+💧 Ativações de irrigação: 1
+📊 Frequência de leitura: 1.0 Hz
+💧 Frequência de irrigação: 25.4/h
+=================================== 

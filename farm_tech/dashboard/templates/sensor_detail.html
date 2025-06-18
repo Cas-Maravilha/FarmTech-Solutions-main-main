@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+
+{% block title %}Sensor {{ sensor.sensor_id }} - FarmTech Solutions{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Informações do Sensor -->
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-microchip me-2"></i>Informações do Sensor</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <strong>ID:</strong> #{{ sensor.sensor_id }}
+                </div>
+                <div class="mb-3">
+                    <strong>Tipo:</strong>
+                    {% if sensor.tipo_sensor == 'umidade' %}
+                        <span class="badge bg-info">
+                            <i class="fas fa-tint me-1"></i>Umidade
+                        </span>
+                    {% elif sensor.tipo_sensor == 'ph' %}
+                        <span class="badge bg-warning">
+                            <i class="fas fa-flask me-1"></i>pH
+                        </span>
+                    {% elif sensor.tipo_sensor == 'nutrientes' %}
+                        <span class="badge bg-success">
+                            <i class="fas fa-leaf me-1"></i>Nutrientes
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <strong>Modelo:</strong> {{ sensor.modelo }}
+                </div>
+                <div class="mb-3">
+                    <strong>Área:</strong> {{ sensor.area_id }}
+                </div>
+                <div class="mb-3">
+                    <strong>Status:</strong>
+                    {% if sensor.status == 'ativo' %}
+                        <span class="badge bg-success">
+                            <i class="fas fa-check-circle me-1"></i>Ativo
+                        </span>
+                    {% elif sensor.status == 'inativo' %}
+                        <span class="badge bg-secondary">
+                            <i class="fas fa-pause-circle me-1"></i>Inativo
+                        </span>
+                    {% else %}
+                        <span class="badge bg-warning">
+                            <i class="fas fa-tools me-1"></i>Manutenção
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <strong>Instalação:</strong> {{ sensor.data_instalacao.split('T')[0] }}
+                </div>
+                {% if sensor.latitude and sensor.longitude %}
+                <div class="mb-3">
+                    <strong>Localização:</strong><br>
+                    <small class="text-muted">
+                        {{ sensor.latitude }}, {{ sensor.longitude }}
+                    </small>
+                </div>
+                {% endif %}
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-warning" onclick="toggleSensorStatus()">
+                        <i class="fas fa-power-off me-2"></i>Alternar Status
+                    </button>
+                    <button class="btn btn-info" onclick="calibrateSensor()">
+                        <i class="fas fa-cog me-2"></i>Calibrar Sensor
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estatísticas -->
+    <div class="col-lg-8 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-bar me-2"></i>Estatísticas (Últimos {{ stats.period_days }} dias)</h5>
+            </div>
+            <div class="card-body">
+                {% if stats.total_readings > 0 %}
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <h4 class="text-primary">{{ stats.total_readings }}</h4>
+                            <small class="text-muted">Total de Leituras</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <h4 class="text-success">{{ "%.1f"|format(stats.average) }}</h4>
+                            <small class="text-muted">Média</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <h4 class="text-warning">{{ "%.1f"|format(stats.maximum) }}</h4>
+                            <small class="text-muted">Máximo</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center">
+                            <h4 class="text-danger">{{ "%.1f"|format(stats.minimum) }}</h4>
+                            <small class="text-muted">Mínimo</small>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Nenhuma leitura encontrada para este período.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Análise de Tendência -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-line me-2"></i>Análise de Tendência</h5>
+            </div>
+            <div class="card-body">
+                {% if trend.trend != 'insufficient_data' %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Tendência:</strong>
+                        {% if trend.trend == 'increasing' %}
+                            <span class="badge bg-success">
+                                <i class="fas fa-arrow-up me-1"></i>Crescendo
+                            </span>
+                        {% elif trend.trend == 'decreasing' %}
+                            <span class="badge bg-danger">
+                                <i class="fas fa-arrow-down me-1"></i>Decrescendo
+                            </span>
+                        {% else %}
+                            <span class="badge bg-info">
+                                <i class="fas fa-minus me-1"></i>Estável
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Variação:</strong> {{ trend.change_percent }}%
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <small class="text-muted">
+                        Primeira leitura: {{ "%.1f"|format(trend.first_value) }} | 
+                        Última leitura: {{ "%.1f"|format(trend.last_value) }}
+                    </small>
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Dados insuficientes para análise de tendência.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Última Leitura -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-clock me-2"></i>Última Leitura</h5>
+            </div>
+            <div class="card-body">
+                {% if stats.last_reading %}
+                <div class="text-center">
+                    <h2 class="text-primary">{{ stats.last_reading.valor }} {{ stats.last_reading.unidade_medida }}</h2>
+                    <p class="text-muted">
+                        {{ stats.last_reading.data_hora.split('T')[0] }} às 
+                        {{ stats.last_reading.data_hora.split('T')[1][:5] }}
+                    </p>
+                    {% if stats.last_reading.observacao %}
+                    <small class="text-muted">
+                        <i class="fas fa-comment me-1"></i>
+                        {{ stats.last_reading.observacao }}
+                    </small>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Nenhuma leitura disponível.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico de Leituras -->
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-area me-2"></i>Histórico de Leituras</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="readingsChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Leituras Recentes -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list me-2"></i>Leituras Recentes</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Data/Hora</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reading in readings %}
+                            <tr>
+                                <td>{{ reading.data_hora.split('T')[0] }} {{ reading.data_hora.split('T')[1][:5] }}</td>
+                                <td>
+                                    <strong>{{ reading.valor }} {{ reading.unidade_medida }}</strong>
+                                </td>
+                                <td>
+                                    {% if reading.status_leitura == 'valida' %}
+                                        <span class="badge bg-success">Válida</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">{{ reading.status_leitura }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if reading.observacao %}
+                                        <small class="text-muted">{{ reading.observacao }}</small>
+                                    {% else %}
+                                        <span class="text-muted">--</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Gráfico de leituras
+const ctx = document.getElementById('readingsChart').getContext('2d');
+const readingsChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [
+            {% for reading in readings|reverse %}
+            '{{ reading.data_hora.split("T")[0] }} {{ reading.data_hora.split("T")[1][:5] }}',
+            {% endfor %}
+        ],
+        datasets: [{
+            label: '{{ sensor.tipo_sensor|title }}',
+            data: [
+                {% for reading in readings|reverse %}
+                {{ reading.valor }},
+                {% endfor %}
+            ],
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                display: true
+            }
+        }
+    }
+});
+
+// Alternar status do sensor
+function toggleSensorStatus() {
+    const currentStatus = '{{ sensor.status }}';
+    const newStatus = currentStatus === 'ativo' ? 'inativo' : 'ativo';
+    
+    if (confirm(`Deseja alterar o status do sensor para "${newStatus}"?`)) {
+        fetch(`/api/sensores/{{ sensor.sensor_id }}/status`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: newStatus })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert('Status alterado com sucesso!');
+                location.reload();
+            } else {
+                alert('Erro ao alterar status: ' + result.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao alterar status');
+        });
+    }
+}
+
+// Calibrar sensor
+function calibrateSensor() {
+    if (confirm('Deseja iniciar a calibração do sensor? Este processo pode levar alguns minutos.')) {
+        alert('Funcionalidade de calibração será implementada em breve');
+    }
+}
+
+// Atualizar dados em tempo real via WebSocket
+const socket = io();
+
+socket.on('sensor_data', function(data) {
+    if (data.sensor_id == {{ sensor.sensor_id }}) {
+        // Atualizar última leitura
+        if (data.latest_reading) {
+            const reading = data.latest_reading;
+            const date = new Date(reading.data_hora);
+            
+            // Atualizar estatísticas se necessário
+            location.reload();
+        }
+    }
+});
+
+// Solicitar dados do sensor
+document.addEventListener('DOMContentLoaded', function() {
+    socket.emit('request_sensor_data', {sensor_id: {{ sensor.sensor_id }}});
+});
+</script>
+{% endblock %} 

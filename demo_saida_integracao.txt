@@ -1,0 +1,46 @@
+FarmTech Solutions - Integração Clima-Agricultura
+
+Carregando dados agrícolas do CSV...
+Dados agrícolas carregados com sucesso: 5 culturas encontradas.
+
+Dados climáticos de: São Paulo em 20/04/2025 13:00:00
+Temperatura: 27.5 °C, Umidade: 65 %
+Condição: céu limpo
+
+RECOMENDAÇÕES ESPECÍFICAS POR CULTURA
+================================================================================
+CULTURA      ÁREA (ha)   PRODUTO      RECOMENDAÇÕES
+--------------------------------------------------------------------------------
+Soja         100.00      fertilizante
+  → Irrigação:    Irrigação imediata recomendada. Condições secas podem afetar o desenvolvimento.
+  → Aplicação:    Em condições secas, aplicar fertilizante mais próximo às raízes
+  → Colheita:     Condições favoráveis para colheita
+  → ALERTA:       Temperatura acima de 25°C, monitorar necessidade hídrica
+--------------------------------------------------------------------------------
+Café         400.00      fosfato
+  → Irrigação:    Irrigação recomendada. Café requer umidade consistente.
+  → Aplicação:    Condições adequadas para aplicação de produtos
+  → Colheita:     Condições favoráveis para colheita
+--------------------------------------------------------------------------------
+Milho        250.00      nitrogênio
+  → Irrigação:    Irrigação urgente. Milho em condições muito secas.
+  → Aplicação:    Aplicar nitrogênio preferencialmente em solo úmido
+  → Colheita:     Condições favoráveis para colheita
+--------------------------------------------------------------------------------
+Feijão       150.00      potássio
+  → Irrigação:    Verifique umidade do solo para determinar necessidade de irrigação
+  → Aplicação:    Condições adequadas para aplicação de produtos
+  → Colheita:     Condições favoráveis para colheita
+  → ALERTA:       Temperatura alta pode afetar floração do feijão
+--------------------------------------------------------------------------------
+Algodão      300.00      ureia
+  → Irrigação:    Verifique umidade do solo para determinar necessidade de irrigação
+  → Aplicação:    Condições adequadas para aplicação de produtos
+  → Colheita:     Condições favoráveis para colheita
+--------------------------------------------------------------------------------
+
+Deseja salvar um relatório consolidado? (s/n): s
+
+Relatório salvo com sucesso em: relatorios/relatorio_integrado_20250420_130105.txt
+
+Execute o script clima_api.R para atualizar dados meteorológicos.

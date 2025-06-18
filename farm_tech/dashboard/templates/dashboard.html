@@ -1,0 +1,314 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - FarmTech Solutions{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Estatísticas Gerais -->
+    <div class="col-12 mb-4">
+        <h2><i class="fas fa-chart-line me-2"></i>Visão Geral do Sistema</h2>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">{{ data.total_areas }}</h4>
+                                <p class="card-text">Áreas</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-map fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">{{ data.total_sensors }}</h4>
+                                <p class="card-text">Sensores</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-microchip fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">{{ data.active_sensors }}</h4>
+                                <p class="card-text">Ativos</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="card-title">{{ data.active_alerts }}</h4>
+                                <p class="card-text">Alertas</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="col-lg-8 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-area me-2"></i>Leituras dos Sensores (Últimas 24h)</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="sensorChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alertas Recentes -->
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-bell me-2"></i>Alertas Recentes</h5>
+            </div>
+            <div class="card-body">
+                <div id="alertsList">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Carregando alertas...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sensores Ativos -->
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-microchip me-2"></i>Sensores Ativos</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Área</th>
+                                <th>Status</th>
+                                <th>Última Leitura</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sensorsTable">
+                            {% for sensor in data.sensors %}
+                            <tr>
+                                <td>{{ sensor.sensor_id }}</td>
+                                <td>
+                                    <span class="badge bg-primary">{{ sensor.tipo_sensor }}</span>
+                                </td>
+                                <td>{{ sensor.area_id }}</td>
+                                <td>
+                                    {% if sensor.status == 'ativo' %}
+                                        <span class="badge bg-success">Ativo</span>
+                                    {% elif sensor.status == 'inativo' %}
+                                        <span class="badge bg-secondary">Inativo</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Manutenção</span>
+                                    {% endif %}
+                                </td>
+                                <td id="last-reading-{{ sensor.sensor_id }}">--</td>
+                                <td id="last-value-{{ sensor.sensor_id }}">--</td>
+                                <td>
+                                    <a href="{{ url_for('sensor_detail', sensor_id=sensor.sensor_id) }}" 
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Áreas -->
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-map me-2"></i>Áreas de Cultivo</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for area in data.areas %}
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card border-success">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ area.nome }}</h6>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-ruler-combined me-1"></i>
+                                        {{ area.tamanho }} {{ area.unidade_medida }}
+                                    </small>
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-layer-group me-1"></i>
+                                        Solo: {{ area.tipo_solo }}
+                                    </small>
+                                </p>
+                                <a href="{{ url_for('area_detail', area_id=area.area_id) }}" 
+                                   class="btn btn-sm btn-outline-success">
+                                    Ver Detalhes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Configuração do Socket.IO
+const socket = io();
+
+// Conectar ao servidor
+socket.on('connect', function() {
+    console.log('Conectado ao servidor');
+});
+
+// Receber dados de sensores
+socket.on('sensor_data', function(data) {
+    updateSensorData(data);
+});
+
+// Receber alertas
+socket.on('alerts_update', function(data) {
+    updateAlerts(data.alerts);
+});
+
+// Atualizar dados do sensor
+function updateSensorData(data) {
+    const sensorId = data.sensor_id;
+    const lastReading = document.getElementById(`last-reading-${sensorId}`);
+    const lastValue = document.getElementById(`last-value-${sensorId}`);
+    
+    if (lastReading && lastValue && data.latest_reading) {
+        const reading = data.latest_reading;
+        const date = new Date(reading.data_hora);
+        lastReading.textContent = date.toLocaleString('pt-BR');
+        lastValue.textContent = `${reading.valor} ${reading.unidade_medida}`;
+    }
+}
+
+// Atualizar alertas
+function updateAlerts(alerts) {
+    const alertsList = document.getElementById('alertsList');
+    
+    if (alerts.length === 0) {
+        alertsList.innerHTML = '<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>Nenhum alerta ativo</div>';
+        return;
+    }
+    
+    alertsList.innerHTML = alerts.slice(0, 5).map(alert => `
+        <div class="alert alert-${getAlertClass(alert.level)} mb-2">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <strong>${alert.title}</strong><br>
+                    <small>${alert.message}</small>
+                </div>
+                <small>${new Date(alert.timestamp).toLocaleString('pt-BR')}</small>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Obter classe CSS para nível de alerta
+function getAlertClass(level) {
+    switch(level) {
+        case 'info': return 'info';
+        case 'warning': return 'warning';
+        case 'critical': return 'danger';
+        case 'emergency': return 'danger';
+        default: return 'info';
+    }
+}
+
+// Gráfico de sensores
+const ctx = document.getElementById('sensorChart').getContext('2d');
+const sensorChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Umidade (%)',
+            data: [],
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }, {
+            label: 'pH',
+            data: [],
+            borderColor: 'rgb(255, 99, 132)',
+            tension: 0.1
+        }, {
+            label: 'Nutrientes (ppm)',
+            data: [],
+            borderColor: 'rgb(54, 162, 235)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Carregar dados iniciais
+document.addEventListener('DOMContentLoaded', function() {
+    // Solicitar dados de sensores
+    socket.emit('request_sensor_data', {sensor_id: 1});
+    
+    // Solicitar alertas
+    socket.emit('request_alerts');
+    
+    // Atualizar dados a cada 30 segundos
+    setInterval(() => {
+        socket.emit('request_alerts');
+    }, 30000);
+});
+</script>
+{% endblock %} 

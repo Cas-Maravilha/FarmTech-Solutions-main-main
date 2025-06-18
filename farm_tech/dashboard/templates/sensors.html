@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+
+{% block title %}Sensores - FarmTech Solutions{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2><i class="fas fa-microchip me-2"></i>Sensores</h2>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSensorModal">
+                <i class="fas fa-plus me-2"></i>Adicionar Sensor
+            </button>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <form method="GET" class="row g-3">
+                    <div class="col-md-3">
+                        <label for="area_id" class="form-label">Área</label>
+                        <select class="form-select" id="area_id" name="area_id">
+                            <option value="">Todas as áreas</option>
+                            {% for area in areas %}
+                            <option value="{{ area.area_id }}" {% if filters.area_id == area.area_id %}selected{% endif %}>
+                                {{ area.nome }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="tipo_sensor" class="form-label">Tipo de Sensor</label>
+                        <select class="form-select" id="tipo_sensor" name="tipo_sensor">
+                            <option value="">Todos os tipos</option>
+                            <option value="umidade" {% if filters.tipo_sensor == 'umidade' %}selected{% endif %}>Umidade</option>
+                            <option value="ph" {% if filters.tipo_sensor == 'ph' %}selected{% endif %}>pH</option>
+                            <option value="nutrientes" {% if filters.tipo_sensor == 'nutrientes' %}selected{% endif %}>Nutrientes</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="">Todos os status</option>
+                            <option value="ativo" {% if filters.status == 'ativo' %}selected{% endif %}>Ativo</option>
+                            <option value="inativo" {% if filters.status == 'inativo' %}selected{% endif %}>Inativo</option>
+                            <option value="manutencao" {% if filters.status == 'manutencao' %}selected{% endif %}>Manutenção</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">&nbsp;</label>
+                        <div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>Filtrar
+                            </button>
+                            <a href="{{ url_for('sensors_page') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Limpar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Sensores -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Lista de Sensores ({{ sensors|length }} encontrados)</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Modelo</th>
+                                <th>Área</th>
+                                <th>Status</th>
+                                <th>Última Leitura</th>
+                                <th>Valor Atual</th>
+                                <th>Instalação</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sensor in sensors %}
+                            <tr>
+                                <td>
+                                    <strong>#{{ sensor.sensor_id }}</strong>
+                                </td>
+                                <td>
+                                    {% if sensor.tipo_sensor == 'umidade' %}
+                                        <span class="badge bg-info">
+                                            <i class="fas fa-tint me-1"></i>Umidade
+                                        </span>
+                                    {% elif sensor.tipo_sensor == 'ph' %}
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-flask me-1"></i>pH
+                                        </span>
+                                    {% elif sensor.tipo_sensor == 'nutrientes' %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-leaf me-1"></i>Nutrientes
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">{{ sensor.tipo_sensor }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ sensor.modelo }}</td>
+                                <td>{{ sensor.area_id }}</td>
+                                <td>
+                                    {% if sensor.status == 'ativo' %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>Ativo
+                                        </span>
+                                    {% elif sensor.status == 'inativo' %}
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-pause-circle me-1"></i>Inativo
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-tools me-1"></i>Manutenção
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td id="last-reading-{{ sensor.sensor_id }}">--</td>
+                                <td id="current-value-{{ sensor.sensor_id }}">--</td>
+                                <td>
+                                    <small class="text-muted">
+                                        {{ sensor.data_instalacao.split('T')[0] }}
+                                    </small>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <a href="{{ url_for('sensor_detail', sensor_id=sensor.sensor_id) }}" 
+                                           class="btn btn-sm btn-outline-primary" title="Ver Detalhes">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-outline-warning" title="Editar"
+                                                onclick="editSensor({{ sensor.sensor_id }})">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Remover"
+                                                onclick="deleteSensor({{ sensor.sensor_id }})">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Adicionar Sensor -->
+<div class="modal fade" id="addSensorModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar Novo Sensor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="addSensorForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="area_id" class="form-label">Área</label>
+                        <select class="form-select" id="area_id" name="area_id" required>
+                            <option value="">Selecione uma área</option>
+                            {% for area in areas %}
+                            <option value="{{ area.area_id }}">{{ area.nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipo_sensor" class="form-label">Tipo de Sensor</label>
+                        <select class="form-select" id="tipo_sensor" name="tipo_sensor" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="umidade">Umidade</option>
+                            <option value="ph">pH</option>
+                            <option value="nutrientes">Nutrientes</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" name="modelo" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="latitude" class="form-label">Latitude</label>
+                                <input type="number" step="any" class="form-control" id="latitude" name="latitude">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="longitude" class="form-label">Longitude</label>
+                                <input type="number" step="any" class="form-control" id="longitude" name="longitude">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Adicionar Sensor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Adicionar sensor
+document.getElementById('addSensorForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+    
+    fetch('/api/sensores', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert('Sensor adicionado com sucesso!');
+            location.reload();
+        } else {
+            alert('Erro ao adicionar sensor: ' + result.error);
+        }
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao adicionar sensor');
+    });
+});
+
+// Editar sensor
+function editSensor(sensorId) {
+    // Implementar edição
+    alert('Funcionalidade de edição será implementada em breve');
+}
+
+// Deletar sensor
+function deleteSensor(sensorId) {
+    if (confirm('Tem certeza que deseja remover este sensor?')) {
+        fetch(`/api/sensores/${sensorId}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert('Sensor removido com sucesso!');
+                location.reload();
+            } else {
+                alert('Erro ao remover sensor: ' + result.error);
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao remover sensor');
+        });
+    }
+}
+
+// Atualizar dados dos sensores via WebSocket
+const socket = io();
+
+socket.on('sensor_data', function(data) {
+    const sensorId = data.sensor_id;
+    const lastReading = document.getElementById(`last-reading-${sensorId}`);
+    const currentValue = document.getElementById(`current-value-${sensorId}`);
+    
+    if (lastReading && currentValue && data.latest_reading) {
+        const reading = data.latest_reading;
+        const date = new Date(reading.data_hora);
+        lastReading.textContent = date.toLocaleString('pt-BR');
+        currentValue.textContent = `${reading.valor} ${reading.unidade_medida}`;
+    }
+});
+
+// Solicitar dados dos sensores
+document.addEventListener('DOMContentLoaded', function() {
+    {% for sensor in sensors %}
+    socket.emit('request_sensor_data', {sensor_id: {{ sensor.sensor_id }}});
+    {% endfor %}
+});
+</script>
+{% endblock %} 
