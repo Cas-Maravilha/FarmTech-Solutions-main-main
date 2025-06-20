@@ -19,7 +19,7 @@ tensorflow==2.13.0
 keras==2.13.1
 
 # Visualização
-matplotlib==3.7.2
+matplotlib==3.9.4
 seaborn==0.12.2
 plotly==5.16.1
 
