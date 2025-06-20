@@ -4,7 +4,7 @@
 # Framework Web
 Flask==2.3.3
 Flask-CORS==4.0.0
-Flask-SocketIO==5.3.6
+Flask-SocketIO==5.5.1
 
 # Banco de Dados
 sqlite3
