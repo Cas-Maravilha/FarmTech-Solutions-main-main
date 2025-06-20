@@ -105,11 +105,11 @@ O **FarmTech Solutions** é um sistema integrado de monitoramento agrícola que 
 ### 🎮 Demonstração Interativa
 ```bash
 # Executar demonstração completa
-python demo_ml_streamlit.py
+python scripts/python/demo_ml_streamlit.py
 
 # Ou executar componentes individuais
-python demo_serial_plotter.py
-streamlit run farmtech_streamlit_app.py
+python scripts/python/demo_serial_plotter.py
+streamlit run scripts/python/farmtech_streamlit_app.py
 ```
 
 ### 📈 Exemplos de Uso
@@ -159,7 +159,7 @@ print(f"Necessidade: {resultado['necessidade_irrigacao']}")
 ### Interface Streamlit
 ```bash
 # Executar interface
-streamlit run farmtech_streamlit_app.py
+streamlit run scripts/python/farmtech_streamlit_app.py
 
 # Páginas disponíveis:
 # 🏠 Dashboard - Métricas em tempo real
@@ -210,7 +210,7 @@ RESET            → Reseta contadores PID
 ### 📊 Demonstração Visual
 ```python
 # Executar demonstração Python
-python demo_serial_plotter.py
+python scripts/python/demo_serial_plotter.py
 
 # Opções disponíveis:
 # 1. 📊 Demonstração gráfica (tempo real)
@@ -248,10 +248,10 @@ USUARIO, LOG_AUDITORIA, LOG_SISTEMA, CONFIGURACAO_SISTEMA
 ### Criação do Banco
 ```bash
 # Criar banco de dados aprimorado
-python criar_banco_aprimorado.py
+python scripts/python/criar_banco_aprimorado.py
 
 # Verificar estrutura
-python verificar_banco_aprimorado.py
+python scripts/python/verificar_banco_aprimorado.py
 ```
 
 ## ⚙️ Instalação
@@ -274,21 +274,21 @@ cd farmtech-solutions
 ### 3. Instalar Dependências
 ```bash
 # Dependências principais
-pip install -r requirements.txt
+pip install -r config/requirements.txt
 
 # Dependências ML
-pip install -r requirements_ml.txt
+pip install -r config/requirements_ml.txt
 ```
 
 ### 4. Configurar Banco de Dados
 ```bash
-python criar_banco_aprimorado.py
+python scripts/python/criar_banco_aprimorado.py
 ```
 
 ### 5. Configurar Hardware
 ```bash
 # Conectar sensores ao ESP32
-# Carregar código: farmtech_esp32_serial_plotter_demo.ino
+# Carregar código: arduino/farmtech_esp32_serial_plotter_demo.ino
 # Abrir Serial Plotter no Arduino IDE
 ```
 
@@ -297,7 +297,7 @@ python criar_banco_aprimorado.py
 ### 1. Hardware ESP32
 ```bash
 # 1. Conectar sensores ao ESP32
-# 2. Carregar código: farmtech_esp32_serial_plotter_demo.ino
+# 2. Carregar código: arduino/farmtech_esp32_serial_plotter_demo.ino
 # 3. Abrir Serial Plotter no Arduino IDE
 # 4. Monitorar dados em tempo real
 ```
@@ -305,19 +305,19 @@ python criar_banco_aprimorado.py
 ### 2. Machine Learning
 ```bash
 # Treinar modelos
-python farmtech_ml_models.py
+python scripts/python/farmtech_ml_models.py
 
 # Executar interface Streamlit
-streamlit run farmtech_streamlit_app.py
+streamlit run scripts/python/farmtech_streamlit_app.py
 
 # Ou executar demonstração completa
-python demo_ml_streamlit.py
+python scripts/python/demo_ml_streamlit.py
 ```
 
 ### 3. API Backend
 ```bash
 # Iniciar servidor API
-python api.py
+python scripts/python/api.py
 
 # Acessar: http://localhost:5000
 ```
@@ -325,30 +325,30 @@ python api.py
 ### 4. Demonstrações
 ```bash
 # Serial Plotter Demo
-python demo_serial_plotter.py
+python scripts/python/demo_serial_plotter.py
 
 # ML e Streamlit Demo
-python demo_ml_streamlit.py
+python scripts/python/demo_ml_streamlit.py
 ```
 
 ## 📚 Documentação
 
 ### Documentos Principais
-- [📊 Serial Plotter Demo](README_SERIAL_PLOTTER.md) - Guia completo do Serial Plotter
-- [🤖 Machine Learning](README_ML_STREAMLIT.md) - Modelos de IA e Streamlit
-- [🗄️ Banco de Dados](documentacao_banco_aprimorado.md) - Estrutura do banco
-- [🔧 API](API_DOCUMENTATION.md) - Documentação da API
-- [🏗️ Arquitetura](ARQUITETURA.md) - Visão geral da arquitetura
+- [📊 Serial Plotter Demo](reports/README_SERIAL_PLOTTER.md) - Guia completo do Serial Plotter
+- [🤖 Machine Learning](reports/README_ML_STREAMLIT.md) - Modelos de IA e Streamlit
+- [🗄️ Banco de Dados](reports/documentacao_banco_aprimorado.md) - Estrutura do banco
+- [🔧 API](reports/API_DOCUMENTATION.md) - Documentação da API
+- [🏗️ Arquitetura](reports/ARQUITETURA.md) - Visão geral da arquitetura
 
 ### Resumos e Exemplos
-- [📊 Resumo Serial Plotter](RESUMO_SERIAL_PLOTTER.md) - Resumo da demonstração
-- [🤖 Resumo ML](RESUMO_ML_STREAMLIT.md) - Resumo dos modelos de IA
-- [🗄️ Resumo Banco](RESUMO_CORRECOES_BANCO.md) - Correções do banco de dados
-- [📄 Exemplo Serial](exemplo_serial_plotter_output.txt) - Saída do Serial Plotter
+- [📊 Resumo Serial Plotter](reports/RESUMO_SERIAL_PLOTTER.md) - Resumo da demonstração
+- [🤖 Resumo ML](reports/RESUMO_ML_STREAMLIT.md) - Resumo dos modelos de IA
+- [🗄️ Resumo Banco](reports/RESUMO_CORRECOES_BANCO.md) - Correções do banco de dados
+- [📄 Exemplo Serial](reports/exemplo_serial_plotter_output.txt) - Saída do Serial Plotter
 
 ### Scripts de Demonstração
-- [🐍 Demo Serial Plotter](demo_serial_plotter.py) - Simulação Python
-- [🤖 Demo ML](demo_ml_streamlit.py) - Demonstração completa
+- [🐍 Demo Serial Plotter](scripts/python/demo_serial_plotter.py) - Simulação Python
+- [🤖 Demo ML](scripts/python/demo_ml_streamlit.py) - Demonstração completa
 - [🔧 Demo API](demo_api.py) - Testes da API
 
 ## 🛠️ Troubleshooting
@@ -366,14 +366,14 @@ python demo_ml_streamlit.py
 #### Machine Learning
 ```
 ❌ Erro de importação
-✅ pip install -r requirements_ml.txt
+✅ pip install -r config/requirements_ml.txt
 ✅ Verificar versão Python (3.8+)
 ```
 
 #### Banco de Dados
 ```
 ❌ Banco não encontrado
-✅ python criar_banco_aprimorado.py
+✅ python scripts/python/criar_banco_aprimorado.py
 ✅ Verificar permissões de escrita
 ```
 
